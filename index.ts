@@ -1,5 +1,6 @@
 import { Config } from "./src/types/config";
 import setData from "./src/functions/setData";
+import getData from "./src/functions/getData";
 
 class PxServJS {
   config: Config;
@@ -10,6 +11,7 @@ class PxServJS {
     };
   }
   setData = (key: string, value: string) => setData(key, value, this.config);
+  getData = (key: string) => getData(key, this.config);
 }
 
 export default PxServJS;
