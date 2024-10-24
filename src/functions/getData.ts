@@ -18,7 +18,8 @@ export default (key: string, config: Config) =>
       const statusCode = request.status;
       const response = await request.json();
 
-      if (statusCode !== 200) return reject(`api error : ${response.message}`);
+      if (statusCode !== 200)
+        return reject(`api error : ${response.messages.en}`);
 
       resolve(response.data.value);
     } catch (err: any) {
