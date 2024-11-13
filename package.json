@@ -1,6 +1,6 @@
 {
   "name": "pxserv",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "npm package that allows you to easily use the PxServ APIs",
   "main": "dist/index.js",
   "scripts": {

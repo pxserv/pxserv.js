@@ -8,9 +8,9 @@ export default (key: string, config: Config) =>
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          apikey: config.apiKey,
         },
         body: JSON.stringify({
-          apiKey: config.apiKey,
           key,
         }),
       });

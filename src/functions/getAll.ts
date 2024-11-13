@@ -8,10 +8,9 @@ export default (config: Config) =>
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          apikey: config.apiKey,
         },
-        body: JSON.stringify({
-          apiKey: config.apiKey,
-        }),
+        body: JSON.stringify({}),
       });
 
       const statusCode = request.status;
