@@ -1,13 +1,18 @@
 {
   "name": "pxserv",
-  "version": "0.0.1",
+  "version": "1.0.4",
   "description": "npm package that allows you to easily use the PxServ APIs",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc"
   },
   "author": "mustafa 'pxsty' kok",
   "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pxsty0/pxserv.js.git"

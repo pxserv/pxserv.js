@@ -8,16 +8,16 @@ export default (config: Config) =>
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          apikey: config.apiKey,
         },
-        body: JSON.stringify({
-          apiKey: config.apiKey,
-        }),
+        body: JSON.stringify({}),
       });
 
       const statusCode = request.status;
       const response = await request.json();
 
-      if (statusCode !== 200) return reject(`api error : ${response.message}`);
+      if (statusCode !== 200)
+        return reject(`api error : ${response.messages.en}`);
 
       resolve(response.data);
     } catch (err: any) {
