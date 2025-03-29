@@ -5,12 +5,11 @@ export default (config: Config) =>
   new Promise<void>(async (resolve, reject) => {
     try {
       const request = await fetch(`${config.baseURL}/database/getAll`, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           apikey: config.apiKey,
         },
-        body: JSON.stringify({}),
       });
 
       const statusCode = request.status;
