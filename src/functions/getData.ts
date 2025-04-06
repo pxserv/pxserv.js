@@ -1,27 +1,28 @@
 import fetch from "node-fetch";
 import { Config } from "../types/config";
 
-export default (key: string, config: Config) =>
-  new Promise<void>(async (resolve, reject) => {
-    try {
-      const request = await fetch(`${config.baseURL}/database/getData`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: config.apiKey,
-        },
-        body: JSON.stringify({
-          key,
-        }),
-      });
+export default async function getData(
+  key: string,
+  config: Config
+): Promise<string> {
+  try {
+    const response = await fetch(`${config.baseURL}/database/getData`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: config.apiKey,
+      },
+      body: JSON.stringify({ key }),
+    });
 
-      const statusCode = request.status;
-      const response = await request.json();
+    const data = await response.json();
 
-      if (statusCode !== 200) return reject(`api error : ${response.message}`);
-
-      resolve(response.data.value);
-    } catch (err: any) {
-      reject(`error sending request: ${err.toString()}`);
+    if (!response.ok) {
+      throw new Error(`API error: ${data.message}`);
     }
-  });
+
+    return data["data"].value;
+  } catch (err: any) {
+    throw new Error(`Error sending request: ${err.toString()}`);
+  }
+}
