@@ -1,24 +1,33 @@
 import fetch from "node-fetch";
 import { Config } from "../types/config";
 
-export default (config: Config) =>
-  new Promise<void>(async (resolve, reject) => {
-    try {
-      const request = await fetch(`${config.baseURL}/database/getAll`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: config.apiKey,
-        },
-      });
+type GetAll = Record<
+  string,
+  {
+    lastUpdate: Date;
+    icon: string;
+    value: string;
+  }
+>;
 
-      const statusCode = request.status;
-      const response = await request.json();
+export default async function getAll(config: Config): Promise<GetAll> {
+  try {
+    const response = await fetch(`${config.baseURL}/database/getAll`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: config.apiKey,
+      },
+    });
 
-      if (statusCode !== 200) return reject(`api error : ${response.message}`);
+    const data = await response.json();
 
-      resolve(response.data);
-    } catch (err: any) {
-      reject(`error sending request: ${err.toString()}`);
+    if (!response.ok) {
+      throw new Error(`API error: ${data.message}`);
     }
-  });
+
+    return data["data"];
+  } catch (err: any) {
+    throw new Error(`Error sending request: ${err.toString()}`);
+  }
+}
