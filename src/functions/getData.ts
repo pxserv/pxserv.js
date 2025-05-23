@@ -1,10 +1,11 @@
 import fetch from "node-fetch";
 import { Config } from "../types/config";
+import { PxServResult } from "../types/result";
 
 export default async function getData(
   key: string,
   config: Config
-): Promise<string> {
+): Promise<PxServResult> {
   try {
     const response = await fetch(`${config.baseURL}/database/getData`, {
       method: "POST",
@@ -17,12 +18,12 @@ export default async function getData(
 
     const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(`API error: ${data.message}`);
-    }
-
-    return data["data"].value;
+    return {
+      status: response.status,
+      message: data["message"],
+      data: data["data"],
+    };
   } catch (err: any) {
-    throw new Error(`Error sending request: ${err.toString()}`);
+    throw new Error(`Error sending PxServ request: ${err.toString()}`);
   }
 }
