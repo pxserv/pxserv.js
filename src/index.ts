@@ -37,3 +37,4 @@ class PxServ {
 }
 
 export default PxServ;
+export type { PxServResult };
