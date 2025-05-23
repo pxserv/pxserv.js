@@ -4,8 +4,9 @@ import getData from "./functions/getData";
 import getAll from "./functions/getAll";
 import removeData from "./functions/removeData";
 import toggleData from "./functions/toggleData";
+import { PxServResult } from "./types/result";
 
-class PxServJS {
+class PxServ {
   config: Config;
   constructor(config: Config) {
     this.config = {
@@ -14,11 +15,26 @@ class PxServJS {
     };
   }
 
-  setData = (key: string, value: string) => setData(key, value, this.config);
-  toggleData = (key: string) => toggleData(key, this.config);
-  getData = (key: string) => getData(key, this.config);
-  getAll = () => getAll(this.config);
-  removeData = (key: string) => removeData(key, this.config);
+  setData = async (key: string, value: string): Promise<PxServResult> => {
+    return setData(key, value, this.config);
+  };
+
+  toggleData = async (key: string): Promise<PxServResult> => {
+    return toggleData(key, this.config);
+  };
+
+  getData = async (key: string): Promise<PxServResult> => {
+    return getData(key, this.config);
+  };
+
+  getAll = async () => {
+    return getAll(this.config);
+  };
+
+  removeData = async (key: string): Promise<PxServResult> => {
+    return removeData(key, this.config);
+  };
 }
 
-export default PxServJS;
+export default PxServ;
+export type { PxServResult };
