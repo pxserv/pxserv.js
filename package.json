@@ -1,6 +1,6 @@
 {
   "name": "pxserv",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "npm package that allows you to easily use the PxServ APIs",
   "main": "dist/index.js",
   "scripts": {
@@ -32,5 +32,10 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.3.4",
     "typescript": "^5.8.3"
-  }
+  },
+  "keywords": [
+    "iot",
+    "database",
+    "pxserv"
+  ]
 }
